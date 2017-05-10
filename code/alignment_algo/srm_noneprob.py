@@ -16,7 +16,7 @@ import numpy as np, scipy, random, sys, math, os
 from scipy import stats
 
 def align(movie_data, options, args, lrh):
-    print 'SRM None-Prob' + str(args.nfeature),
+    print('SRM None-Prob' + str(args.nfeature), end=' ')
     sys.stdout.flush()
   
     nvoxel = movie_data.shape[0]
@@ -38,7 +38,7 @@ def align(movie_data, options, args, lrh):
   
         #initialization
         if args.randseed != None:
-            print 'randinit',
+            print('randinit', end=' ')
             np.random.seed(args.randseed)
             A = np.mat(np.random.random((nvoxel,nfeature)))
             Q, R_qr = np.linalg.qr(A)
@@ -61,10 +61,10 @@ def align(movie_data, options, args, lrh):
         G = workspace['G']
         niter = workspace['niter']
   
-    print str(niter+1)+'th',
+    print(str(niter+1)+'th', end=' ')
     for i in range(base_iter+1):
         for m in range(nsubjs):
-            print '.',
+            print('.', end=' ')
             sys.stdout.flush()
   
             G_tmp = G*nsubjs - movie_data_zscore[:,:,m].T.dot(R[:,:,m]) # G_tmp = G-XR
@@ -92,7 +92,7 @@ def align(movie_data, options, args, lrh):
         obj_val_tmp = 0
         for m in range(nsubjs):
             obj_val_tmp += np.linalg.norm(bX[:, :, m] - bW[:, :, m].dot(S), 'fro')
-        print obj_val_tmp
+        print(obj_val_tmp)
         return obj_val_tmp
   
     new_niter = niter + 1

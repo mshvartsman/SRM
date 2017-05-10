@@ -31,7 +31,7 @@ parser.add_argument("nrand", type=int,
                     help="number of random initilization to average")
 
 args = parser.parse_args()
-print '--------------experiment arguments--------------'
+print('--------------experiment arguments--------------')
 pprint.pprint(args.__dict__,width=1)
 
 #####################List out all the algos to show in fig#####################
@@ -66,7 +66,7 @@ align_data_rh = movie_data_rh['movie_data_rh']
 
 def get_acc(acc_file):
     if not os.path.exists(acc_file):
-        print 'NO ' + acc_file
+        print('NO ' + acc_file)
         return -1, True
     else:
         ws_acc = np.load(acc_file)
@@ -105,17 +105,17 @@ def get_obj(obj_file_lh, obj_file_rh, args_tmp):
         return obj_val, False
     else:
         if not os.path.exists(obj_file_lh):
-            print 'NO ' + obj_file_lh
+            print('NO ' + obj_file_lh)
         if not os.path.exists(obj_file_rh):
-            print 'NO ' + obj_file_rh
+            print('NO ' + obj_file_rh)
         return -1, True
 
 
 for itr in range(args.niter):
-    print str(itr)+'|',
+    print(str(itr)+'|', end=' ')
     sys.stdout.flush()
     for i, algo in enumerate(algo_list):
-        print '.',
+        print('.', end=' ')
         sys.stdout.flush()
         algo_folder = algo['align_algo'] + ("_"+algo['kernel'] if algo['kernel'] else "") + '/'
         acc_filename = algo['align_algo']+'_acc_' + str(itr) + '.npz'
@@ -125,7 +125,7 @@ for itr in range(args.niter):
         acc_tmp =[]
         obj_tmp =[]
         if algo['rand'] is False:
-            for loo in xrange(args.nsubjs):
+            for loo in range(args.nsubjs):
                 opt_folder = algo['nfeature']+'feat/identity/loo'+str(loo)+'/'
                 acc_file = working_path + algo_folder + opt_folder + acc_filename
                 obj_file_lh = working_path + algo_folder + opt_folder + obj_filename_lh
@@ -136,8 +136,8 @@ for itr in range(args.niter):
                 acc_tmp.append(acc_val)
                 obj_tmp.append(obj_val)
         else:
-            for rnd in xrange(args.nrand):
-                for loo in xrange(args.nsubjs):
+            for rnd in range(args.nrand):
+                for loo in range(args.nsubjs):
                     opt_folder = algo['nfeature']+'feat/'+'rand'+str(rnd)+'/loo'+str(loo)+'/'
                     acc_file = working_path + algo_folder + opt_folder + acc_filename
                     obj_file_lh = working_path + algo_folder + opt_folder + obj_filename_lh
@@ -173,8 +173,8 @@ font = {'family': 'serif', 'size': 8}
 plt.rc('text', usetex=True)
 plt.rc('font', **font)
 #aspectratio = 4
-idx = range(len(name))
-x_idx = range(1,acc_mean.shape[1])
+idx = list(range(len(name)))
+x_idx = list(range(1,acc_mean.shape[1]))
 error_config = {'ecolor': '0'}
 color_code = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'b', 'g', 'r', 'c', 'm', 'y', 'k']
 line_styles = ['-',':']

@@ -24,7 +24,7 @@ parser.add_argument("nrand"     , type = int,
                     help="number of random initilization to average")
 
 args = parser.parse_args()
-print '--------------experiment arguments--------------'
+print('--------------experiment arguments--------------')
 pprint.pprint(args.__dict__,width=1)
 
 #####################List out all the algos to show in fig#####################
@@ -60,7 +60,7 @@ for i, algo in enumerate(algo_list):
       opt_folder  = algo['nfeature']+'feat/identity/all/'
       data_path = working_path + algo_folder + opt_folder + filename
       if not os.path.exists(data_path):
-          print 'NO '+data_path
+          print('NO '+data_path)
           missing_file = True
       else:
           ws = np.load(data_path)
@@ -73,7 +73,7 @@ for i, algo in enumerate(algo_list):
           opt_folder = algo['nfeature']+'feat/'+'rand'+str(rnd)+'/all/'
           data_path = working_path + algo_folder + opt_folder + filename
           if not os.path.exists(data_path):
-              print 'NO '+data_path
+              print('NO '+data_path)
               missing_file = True
           else:
               ws = np.load(data_path)
@@ -93,7 +93,7 @@ plt.rc('text', usetex=True)
 plt.rc('font', **font)
 
 aspectratio=4.5
-idx = range(len(algo_list))
+idx = list(range(len(algo_list)))
 
 plt.figure()
 error_config = {'ecolor': '0'}
@@ -119,6 +119,6 @@ plt.title('Image Stimulus Prediction {} {}vx {}TRs'.format(args.dataset.replace(
 filename_list = ['bar_accuracy', args.dataset , args.nvoxel+'vx', args.nTR+'TR' ,\
                 'imgpred_'+ args.niter+'thIter']
 
-print '_'.join(filename_list)
+print('_'.join(filename_list))
 plt.savefig(output_path + '_'.join(filename_list) + '_spha.eps', format='eps', dpi=200,bbox_inches='tight')
 

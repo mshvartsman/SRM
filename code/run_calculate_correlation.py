@@ -70,7 +70,7 @@ phac_pred = np.zeros((nrnd*2,len(nfeat_list),nsmooth))
 
 for smooth_idx in [int(sys.argv[1])] :#range(nsmooth):
     for rnd_idx in [int(sys.argv[2])] :#range(nrnd):
-        print 'sherlock_pmc_smooth{}_rnd{}_noLR_g1'.format(smooth_idx,rnd_idx)
+        print('sherlock_pmc_smooth{}_rnd{}_noLR_g1'.format(smooth_idx,rnd_idx))
         for align_idx in [1,2]:
             ws1 = scipy.io.loadmat('/jukebox/ramadge/pohsuan/pHA/data/input/sherlock_pmc_smooth{}_rnd{}_noLR_g1/813vx/1976TR/movie_data.mat'.format(smooth_idx,rnd_idx))
             g1_orig = ws1['movie_data']
@@ -89,7 +89,7 @@ for smooth_idx in [int(sys.argv[1])] :#range(nsmooth):
                 g1_orig_pred = g1_orig[:,:988,:]
                 g2_orig_pred = g2_orig[:,:988,:]
             else:
-                print 'ERROR!!!!!'
+                print('ERROR!!!!!')
 
             for m in range(g1_orig.shape[2]):
                 g1_orig_align[:,:,m] = stats.zscore(g1_orig_align[:,:,m].T ,axis=0, ddof=1).T
@@ -115,7 +115,7 @@ for smooth_idx in [int(sys.argv[1])] :#range(nsmooth):
             pred [nrnd*(align_idx-1)+rnd_idx,smooth_idx] = np.mean(np.diag(corrmat))
 
             for i,nfeat in enumerate(nfeat_list):
-                print nfeat,
+                print(nfeat, end=' ')
                 rseed = 0
                 S1,W1 = pHAc(g1_orig_align,nfeature = nfeat, randseed=rseed)
                 S2,W2 = pHAc(g2_orig_align,nfeature = nfeat, randseed=rseed)

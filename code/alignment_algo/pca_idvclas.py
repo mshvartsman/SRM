@@ -16,7 +16,7 @@ sys.path.append('/jukebox/ramadge/pohsuan/scikit-learn/sklearn')
 from sklearn.decomposition import PCA
 
 def align(movie_data, options, args, lrh):
-    print 'PCA(scikit-learn)'
+    print('PCA(scikit-learn)')
     nvoxel = movie_data.shape[0]
     nTR    = movie_data.shape[1]
     nsubjs = movie_data.shape[2]
@@ -37,7 +37,7 @@ def align(movie_data, options, args, lrh):
     np.fill_diagonal(pert,1,wrap=True)
     U, s, VT = np.linalg.svd(bX+0.001*pert, full_matrices=False)
 
-    bW = U[:,range(nfeature)]
+    bW = U[:,list(range(nfeature))]
     ES = np.diag(s).dot(VT)
     ES = ES[:nfeature,:]
 

@@ -8,7 +8,7 @@ from scipy.signal import butter, lfilter
 
 
 subj = int(sys.argv[1])
-print 'subj {}'.format(subj)
+print('subj {}'.format(subj))
 roi = 'pt'
 template_path = '/jukebox/fastscratch/pohsuan/pHA/data/raw/forest/'+\
                 'psydata.ovgu.de/forrest_gump/templates/grpbold7Tad/from_mni/'
@@ -44,7 +44,7 @@ if subj in [3,9]:
     np.savez(filename, {'subj_data': subj_data})
     sys.exit()
 
-print str(subj)+':'
+print(str(subj)+':')
 sys.stdout.flush()
 
 datapath = '/jukebox/fastscratch/pohsuan/pHA/data/raw/forest/'+\
@@ -55,7 +55,7 @@ datapath = '/jukebox/fastscratch/pohsuan/pHA/data/raw/forest/'+\
 run = 1
 runpath  = 'task001_run00'+str(run)+'/'
 bold_fname = os.path.join(datapath+runpath, 'bold_dico_dico7Tad2grpbold7Tad.nii.gz')
-print bold_fname
+print(bold_fname)
 data_tmp  = fmri_dataset(bold_fname,mask = mask_fname)
 data_tmp  = data_tmp.samples.T 
 # bandpass filter
@@ -67,7 +67,7 @@ subj_data = data_tmp[:,nTR_remove:-nTR_remove]
 for run in range(2,nrun+1):
     runpath  = 'task001_run00'+str(run)+'/'
     bold_fname = os.path.join(datapath+runpath, 'bold_dico_dico7Tad2grpbold7Tad.nii.gz')
-    print bold_fname
+    print(bold_fname)
     data_tmp  = fmri_dataset(bold_fname,mask = mask_fname)
     data_tmp  = data_tmp.samples.T 
     # bandpass filter

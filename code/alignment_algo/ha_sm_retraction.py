@@ -55,7 +55,7 @@ def align(movie_data, options, args, lrh):
   
         #initialization
         if args.randseed != None:
-            print 'randinit',
+            print('randinit', end=' ')
             np.random.seed(args.randseed)
             A = np.mat(np.random.random((nvoxel,nfeature)))
             Q, R_qr = np.linalg.qr(A)
@@ -77,8 +77,8 @@ def align(movie_data, options, args, lrh):
         G = workspace['G']
         niter = workspace['niter']
   
-    print str(niter+1)+'th',
-    print('.'),
+    print(str(niter+1)+'th', end=' ')
+    print(('.'), end=' ')
     sys.stdout.flush()
     #r = 0
     #for m in range(nsubjs):
@@ -110,9 +110,9 @@ def test_SM_Retraction():
   
     A = np.mat(np.random.random((nvoxel,nvoxel)))
     Q, R_qr = np.linalg.qr(A)
-    W = Q[:,range(nfeature)]
-    print '---W---'
-    print W
+    W = Q[:,list(range(nfeature))]
+    print('---W---')
+    print(W)
   
     W0 = np.zeros((nvoxel, nfeature))
     for i in range(nfeature):
@@ -121,26 +121,26 @@ def test_SM_Retraction():
     G = X.dot(W0)
   
     d = np.linalg.norm( W-W0 ,'fro')
-    print d
-    print W
+    print(d)
+    print(W)
     while d > math.sqrt(eps):
         #W = stiefgeod(W, newton_step(W,X,G))
         W = retraction(W,X,G)
         d = np.linalg.norm( W-W0 ,'fro')
-        print d
-        print W
+        print(d)
+        print(W)
 
 def my_line_search(F,F_prime, init, step, c1, c2):
     tau = init
   
     while not F(tau) <= F(0) + c1*tau*F_prime(0) or not F_prime(tau) >= c2*F_prime(0) :
-        print '---1---: '+str(F(0) + c1*tau*F_prime(0)-F(tau))
-        print F(tau)
-        print F(0)
-        print c1*tau*F_prime(0)
-        print '---2---: '+str(F_prime(tau) - c2*F_prime(0))
-        print F_prime(tau)
-        print c2*F_prime(0)
-        print 'tau'+str(tau)
+        print('---1---: '+str(F(0) + c1*tau*F_prime(0)-F(tau)))
+        print(F(tau))
+        print(F(0))
+        print(c1*tau*F_prime(0))
+        print('---2---: '+str(F_prime(tau) - c2*F_prime(0)))
+        print(F_prime(tau))
+        print(c2*F_prime(0))
+        print('tau'+str(tau))
         tau = tau - step
     return tau

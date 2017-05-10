@@ -10,7 +10,7 @@ import numpy as np, scipy, random, sys, math, os
 from scipy import stats
 
 def align(movie_data, options, args, lrh):
-    print 'HA',
+    print('HA', end=' ')
     sys.stdout.flush()
 
     nvoxel = movie_data.shape[0]
@@ -30,7 +30,7 @@ def align(movie_data, options, args, lrh):
         
         #initialization
         if args.randseed != None:
-            print 'randinit',
+            print('randinit', end=' ')
             np.random.seed(args.randseed)
             A = np.mat(np.random.random((nvoxel,nvoxel)))
             Q, R_qr = np.linalg.qr(A)
@@ -52,9 +52,9 @@ def align(movie_data, options, args, lrh):
         G = workspace['G']
         niter = workspace['niter']
   
-    print str(niter+1)+'th',
+    print(str(niter+1)+'th', end=' ')
     for m in range(nsubjs):
-        print '.',
+        print('.', end=' ')
         sys.stdout.flush()  
         U, s, V = np.linalg.svd(movie_data_zscore[:,:,m].dot(G)+0.001*np.eye(nvoxel),\
                                 full_matrices=False) #USV = svd(X^TG)

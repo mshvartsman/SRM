@@ -31,7 +31,7 @@ parser.add_argument("nrand"     , type = int,
 
 
 args = parser.parse_args()
-print '--------------experiment arguments--------------'
+print('--------------experiment arguments--------------')
 pprint.pprint(args.__dict__,width=1)
 
 #####################List out all the algos to show in fig#####################
@@ -72,7 +72,7 @@ for i in range(len(algo_list)):
         exp_folder  = 'imgtrn_mysseg_'+onetwo[order]+'_winsize'+str(args.winsize)+'/'
         opt_folder  = algo['nfeature']+'feat/identity/loo'+str(loo)+'/'
         if not os.path.exists(working_path + exp_folder+ algo_folder + opt_folder + filename):
-            print 'NO '+working_path + exp_folder+ algo_folder + opt_folder + filename
+            print('NO '+working_path + exp_folder+ algo_folder + opt_folder + filename)
             missing_file = True
         else:
             ws = np.load(working_path + exp_folder+ algo_folder + opt_folder + filename) 
@@ -89,7 +89,7 @@ for i in range(len(algo_list)):
           exp_folder  = 'imgtrn_mysseg_'+onetwo[order]+'_winsize'+str(args.winsize)+'/'
           opt_folder  = algo['nfeature']+'feat/'+'rand'+str(rnd)+'/loo'+str(loo)+'/'
           if not os.path.exists(working_path + exp_folder+ algo_folder + opt_folder + filename):
-              print 'NO '+working_path + exp_folder+ algo_folder + opt_folder + filename
+              print('NO '+working_path + exp_folder+ algo_folder + opt_folder + filename)
               missing_file = True
           else:
               ws = np.load(working_path + exp_folder + algo_folder + opt_folder + filename) 
@@ -126,7 +126,7 @@ width=0.5
 #idx = range(len(algo_list))
 idx = np.arange(0,len(name)*0.5,width)
 #idx = np.array(range(len(algo_list)))
-print idx
+print(idx)
 plt.figure()
 error_config = {'ecolor': '0'}
 rects = plt.bar(idx, all_mean, yerr=all_se, align='center', error_kw=error_config, width =  width, edgecolor='white')

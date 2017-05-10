@@ -22,7 +22,7 @@ import numpy as np, scipy, random, sys, math, os
 from scipy import stats
 
 def align(movie_data, options, args, lrh):
-    print 'SRM',
+    print('SRM', end=' ')
     sys.stdout.flush()
   
     nvoxel = movie_data.shape[0]
@@ -50,7 +50,7 @@ def align(movie_data, options, args, lrh):
   
         #initialization
         if args.randseed != None:
-            print 'randinit',
+            print('randinit', end=' ')
             np.random.seed(args.randseed)
             A = np.mat(np.random.random((nvoxel,nfeature)))
             Q, R_qr = np.linalg.qr(A)
@@ -80,7 +80,7 @@ def align(movie_data, options, args, lrh):
     # remove mean
     bX = bX - bX.mean(axis=1)[:,np.newaxis]
   
-    print str(niter+1)+'th',
+    print(str(niter+1)+'th', end=' ')
    
     bSig_x = bW.dot(bSig_s).dot(bW.T)
   
@@ -92,7 +92,7 @@ def align(movie_data, options, args, lrh):
     bSig_s = bSig_s - bSig_s.T.dot(bW.T).dot(inv_bSig_x).dot(bW).dot(bSig_s) + ES.dot(ES.T)/float(nTR)
   
     for m in range(nsubjs):
-        print ('.'),
+        print(('.'), end=' ')
         sys.stdout.flush()
         Am = bX[m*nvoxel:(m+1)*nvoxel,:].dot(ES.T)
         pert = np.zeros((Am.shape))
@@ -113,7 +113,7 @@ def align(movie_data, options, args, lrh):
     # calculate log likelihood
     sign , logdet = np.linalg.slogdet(bSig_x)
     if sign == -1:
-        print str(new_niter)+'th iteration, log sign negative'
+        print(str(new_niter)+'th iteration, log sign negative')
   
     loglike = - 0.5*nTR*logdet - 0.5*np.trace(bX.T.dot(inv_bSig_x).dot(bX)) #-0.5*nTR*nvoxel*nsubjs*math.log(2*math.pi)
   
@@ -121,6 +121,6 @@ def align(movie_data, options, args, lrh):
                         loglike=loglike)
     
     # print str(-0.5*nTR*logdet)+','+str(-0.5*np.trace(bX.T.dot(inv_bSig_x).dot(bX)))
-    print str(loglike) 
+    print(str(loglike)) 
   
     return new_niter

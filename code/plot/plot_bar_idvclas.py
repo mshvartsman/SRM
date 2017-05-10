@@ -31,7 +31,7 @@ parser.add_argument("allfeat"     , type = int,
 
 
 args = parser.parse_args()
-print '--------------experiment arguments--------------'
+print('--------------experiment arguments--------------')
 pprint.pprint(args.__dict__,width=1)
 
 #####################List out all the algos to show in fig#####################
@@ -67,13 +67,13 @@ for i, algo in enumerate(algo_list):
 
   if algo['rand'] == False:
     acc_tmp=[]
-    for loo in xrange(args.nsubjs):
+    for loo in range(args.nsubjs):
       opt_folder  = 'all'+str(args.allfeat)+'feat/'+'group'+algo['nfeature']+'feat/identity/loo'+str(loo)+'/'
       #ws = np.load(working_path + algo_folder + opt_folder + filename)
       #acc_tmp.append(ws['accu'])
       #ws.close()
       if not os.path.exists(working_path + algo_folder + opt_folder + filename):
-          print 'NO '+working_path + algo_folder + opt_folder + filename
+          print('NO '+working_path + algo_folder + opt_folder + filename)
           missing_file = True
       else:
           ws = np.load(working_path + algo_folder + opt_folder + filename)
@@ -83,14 +83,14 @@ for i, algo in enumerate(algo_list):
     all_se  [i] = np.std(acc_tmp)/math.sqrt(2*args.nsubjs)
   else:
     acc_tmp = []
-    for rnd in xrange(args.nrand):
-      for loo in xrange(args.nsubjs):
+    for rnd in range(args.nrand):
+      for loo in range(args.nsubjs):
         opt_folder  = 'all'+str(args.allfeat)+'feat/'+'group'+algo['nfeature']+'feat/'+'rand'+str(rnd)+'/loo'+str(loo)+'/'
         #ws = np.load(working_path + algo_folder + opt_folder + filename)
         #acc_tmp.append(ws['accu'])
         #ws.close()
         if not os.path.exists(working_path + algo_folder + opt_folder + filename):
-            print 'NO '+working_path + algo_folder + opt_folder + filename
+            print('NO '+working_path + algo_folder + opt_folder + filename)
             missing_file = True
         else:
             ws = np.load(working_path + algo_folder + opt_folder + filename)
@@ -111,7 +111,7 @@ plt.rc('text', usetex=True)
 plt.rc('font', **font)
 
 aspectratio=2.5
-idx = range(len(name))
+idx = list(range(len(name)))
 
 plt.figure()
 error_config = {'ecolor': '0'}

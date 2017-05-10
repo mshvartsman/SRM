@@ -27,7 +27,7 @@ output_path = '/jukebox/ramadge/pohsuan/pHA/data/raw/sherlock_pmc_smooth{}'.form
 
 mask_fname = os.path.join(template_path, 'PMC_3mm.nii')
 
-subj_idx_all = range(1,18)
+subj_idx_all = list(range(1,18))
 subj_idx_all.remove(5)
 
 movie_all = np.empty((len(subj_idx_all),1), dtype=object)
@@ -39,7 +39,7 @@ maskdata = mask.get_data()
 
 for idx,subj_idx in enumerate(subj_idx_all):
     bold_fname = os.path.join(data_path, data_name.format(subj_idx))
-    print bold_fname
+    print(bold_fname)
     img = nib.load(bold_fname)
     imgdata = img.get_data()
     assert imgdata.shape[0:3] == maskdata.shape
@@ -52,7 +52,7 @@ for idx,subj_idx in enumerate(subj_idx_all):
 
 for rseed in range(5):
     random.seed(rseed)
-    tmp = range(len(movie_all))
+    tmp = list(range(len(movie_all)))
     random.shuffle(tmp)
     g1_idx = tmp[:len(tmp)/2]
     g2_idx = tmp[len(tmp)/2 :]
@@ -66,7 +66,7 @@ for rseed in range(5):
     if not os.path.exists(output_path+'_rnd{}_g2/'.format(rseed)):
         os.mkdir(output_path+'_rnd{}_g2/'.format(rseed))
     scipy.io.savemat(output_path+'_rnd{}_g1/'.format(rseed)+'sherlock_'+roi+'.mat', {'movie_all' : movie_g1})
-    print output_path+'_rnd{}_g1/'.format(rseed)+'sherlock_'+roi+'.mat'
+    print(output_path+'_rnd{}_g1/'.format(rseed)+'sherlock_'+roi+'.mat')
     scipy.io.savemat(output_path+'_rnd{}_g2/'.format(rseed)+'sherlock_'+roi+'.mat', {'movie_all' : movie_g2})
-    print output_path+'_rnd{}_g2/'.format(rseed)+'sherlock_'+roi+'.mat'
+    print(output_path+'_rnd{}_g2/'.format(rseed)+'sherlock_'+roi+'.mat')
 

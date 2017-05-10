@@ -41,7 +41,7 @@ for subj in range(nsubj):
         subj_data = np.zeros(0)
         forrest_movie_all[subj,0] = subj_data
         continue
-    print str(subj)+':'
+    print(str(subj)+':')
     sys.stdout.flush()
 
     datapath = '/jukebox/fastscratch/pohsuan/pHA/data/raw/forest/'+\
@@ -52,7 +52,7 @@ for subj in range(nsubj):
     run = 1
     runpath  = 'task001_run00'+str(run)+'/'
     bold_fname = os.path.join(datapath+runpath, 'bold_dico_dico7Tad2grpbold7Tad.nii.gz')
-    print bold_fname
+    print(bold_fname)
     data_tmp  = fmri_dataset(bold_fname,mask = mask_fname)
     data_tmp  = data_tmp.samples.T 
     # bandpass filter
@@ -64,7 +64,7 @@ for subj in range(nsubj):
     for run in range(2,nrun+1):
         runpath  = 'task001_run00'+str(run)+'/'
         bold_fname = os.path.join(datapath+runpath, 'bold_dico_dico7Tad2grpbold7Tad.nii.gz')
-        print bold_fname
+        print(bold_fname)
         data_tmp  = fmri_dataset(bold_fname,mask = mask_fname)
         data_tmp  = data_tmp.samples.T 
         # bandpass filter

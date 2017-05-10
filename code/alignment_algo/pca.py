@@ -14,7 +14,7 @@ import sys
 sys.path.append('/jukebox/ramadge/pohsuan/scikit-learn/sklearn')
 
 def align(movie_data, options, args, lrh):
-    print 'PCA'
+    print('PCA')
     nvoxel = movie_data.shape[0]
     nTR    = movie_data.shape[1]
     nsubjs = movie_data.shape[2]
@@ -33,7 +33,7 @@ def align(movie_data, options, args, lrh):
 
     U, s, VT = np.linalg.svd(bX, full_matrices=False)
 
-    bW = U[:,range(nfeature)]
+    bW = U[:,list(range(nfeature))]
     ES = np.diag(s).dot(VT)
     ES = ES[:nfeature,:]
 

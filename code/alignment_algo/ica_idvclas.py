@@ -16,7 +16,7 @@ sys.path.append('/jukebox/ramadge/pohsuan/scikit-learn/sklearn')
 from sklearn.decomposition import FastICA
 
 def align(movie_data, options, args, lrh):
-    print 'pICA(scikit-learn)'
+    print('pICA(scikit-learn)')
     nvoxel = movie_data.shape[0]
     nTR    = movie_data.shape[1]
     nsubjs = movie_data.shape[2]

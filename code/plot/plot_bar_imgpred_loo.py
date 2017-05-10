@@ -25,13 +25,13 @@ parser.add_argument("nrand"     , type = int,
                     help="number of random initilization to average")
 
 args = parser.parse_args()
-print '--------------experiment arguments--------------'
+print('--------------experiment arguments--------------')
 pprint.pprint(args.__dict__,width=1)
 
 #####################List out all the algos to show in fig#####################
 
 os.system('python algo_list_plot_loo_{}/create_algo_list_{}.py'.format(args.tag,args.dataset))
-print 'python algo_list_plot_loo_{}/create_algo_list_{}.py'.format(args.tag,args.dataset)
+print('python algo_list_plot_loo_{}/create_algo_list_{}.py'.format(args.tag,args.dataset))
 pkl_file = open('algo_list.pkl', 'rb')
 algo_list = pickle.load(pkl_file)
 pkl_file.close()
@@ -59,12 +59,12 @@ for i, algo in enumerate(algo_list):
 
   if algo['rand'] == False:
     acc_tmp=[]
-    for loo in xrange(args.nsubjs):
+    for loo in range(args.nsubjs):
       opt_folder  = algo['nfeature']+'feat/identity/loo'+str(loo)+'/'
       #ws = np.load(working_path + algo_folder + opt_folder + filename) 
       data_path = working_path + algo_folder + opt_folder + filename
       if not os.path.exists(data_path):
-          print 'NO '+data_path
+          print('NO '+data_path)
           missing_file = True
       else:
           ws = np.load(data_path)    
@@ -74,13 +74,13 @@ for i, algo in enumerate(algo_list):
     all_se  [i] = np.std(acc_tmp)/math.sqrt(args.nsubjs) 
   else:
     acc_tmp = []
-    for rnd in xrange(args.nrand):
-      for loo in xrange(args.nsubjs):
+    for rnd in range(args.nrand):
+      for loo in range(args.nsubjs):
         opt_folder  = algo['nfeature']+'feat/'+'rand'+str(rnd)+'/loo'+str(loo)+'/'
         #ws = np.load(working_path + algo_folder + opt_folder + filename) 
         data_path = working_path + algo_folder + opt_folder + filename
         if not os.path.exists(data_path):
-            print 'NO '+data_path
+            print('NO '+data_path)
             missing_file = True
         else:
             ws = np.load(data_path)    
@@ -107,7 +107,7 @@ aspectratio=3
 width=0.5
 #idx = range(len(name))
 idx = np.arange(0,len(name)*0.5,width)
-print idx
+print(idx)
 
 plt.figure()
 error_config = {'ecolor': '0'}
@@ -139,4 +139,4 @@ filename_list = ['bar_accuracy', args.dataset , args.nvoxel+'vx', args.nTR+'TR' 
                 'imgpred_loo_'+ args.niter+'thIter']
 plt.savefig(output_path + '_'.join(filename_list) + '.eps', format='eps', dpi=200,bbox_inches='tight')
 np.savez_compressed(output_path + '_'.join(filename_list) + '.npz',name = name, all_mean = all_mean, all_se = all_se)
-print output_path + '_'.join(filename_list) + '.npz'
+print(output_path + '_'.join(filename_list) + '.npz')

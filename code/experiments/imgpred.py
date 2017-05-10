@@ -6,7 +6,7 @@ sys.path.append('/jukebox/ramadge/pohsuan/scikit-learn/sklearn')
 from sklearn.svm import NuSVC
 
 def predict(transformed_data, args, trn_label ,tst_label):
-    print 'imgpred',
+    print('imgpred', end=' ')
     sys.stdout.flush()
     
     (ndim, nsample , nsubjs) = transformed_data.shape
@@ -18,7 +18,7 @@ def predict(transformed_data, args, trn_label ,tst_label):
     for tst_subj in range(nsubjs):
         tst_data = transformed_data[:,:,tst_subj]
     
-        trn_subj = range(nsubjs)
+        trn_subj = list(range(nsubjs))
         trn_subj.remove(tst_subj)
     
         for m in range(nsubjs-1):
@@ -36,14 +36,14 @@ def predict(transformed_data, args, trn_label ,tst_label):
     return accu
 
 def predict_loo(transformed_data, args, trn_label ,tst_label):
-    print 'imgpred loo',
-    print args.loo,
+    print('imgpred loo', end=' ')
+    print(args.loo, end=' ')
     sys.stdout.flush()
   
     (ndim, nsample , nsubjs) = transformed_data.shape
   
     loo = args.loo
-    loo_idx = range(nsubjs)
+    loo_idx = list(range(nsubjs))
     loo_idx.remove(loo)
   
     #tst_data = np.zeros(shape = (ndim,nsample))

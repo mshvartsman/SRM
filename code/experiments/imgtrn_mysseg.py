@@ -7,7 +7,7 @@ from sklearn.svm import NuSVC
 #from scikits.learn.svm import NuSVC
 
 def predict(transformed_data, args, options = None):
-    print 'mysseg',
+    print('mysseg', end=' ')
     sys.stdout.flush()
   
     (ndim, nsample , nsubjs) = transformed_data.shape
@@ -49,12 +49,12 @@ def predict(transformed_data, args, options = None):
                     corr_mtx[i,j] = -np.inf
     
         rank =  np.argmax(corr_mtx, axis=1)
-        accu[tst_subj] = sum(rank == range(nseg)) / float(nseg)
+        accu[tst_subj] = sum(rank == list(range(nseg))) / float(nseg)
   
     return accu
 
 def predict_loo(transformed_data, args):
-    print 'mysseg loo',
+    print('mysseg loo', end=' ')
     sys.stdout.flush()
   
     (ndim, nsample , nsubjs) = transformed_data.shape
@@ -85,6 +85,6 @@ def predict_loo(transformed_data, args):
                 corr_mtx[i,j] = -np.inf
   
     rank = np.argmax(corr_mtx, axis=1)
-    accu = sum(rank == range(nseg)) / float(nseg)
+    accu = sum(rank == list(range(nseg))) / float(nseg)
   
     return accu

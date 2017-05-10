@@ -29,7 +29,7 @@ if not os.path.exists(output_path):
 
 mask_fname = os.path.join(template_path, 'PMC_3mm.nii')
 
-subj_idx_all = range(1,18)
+subj_idx_all = list(range(1,18))
 #subj_idx_all = range(1,2)
 subj_idx_all.remove(5)
 movie_all = np.empty((len(subj_idx_all),1), dtype=object)
@@ -58,4 +58,4 @@ for idx,subj_idx in enumerate(subj_idx_all):
     img_out = nib.Nifti1Image(syn_data,None)#, np.eye(4))
 
     nib.save(img_out,  output_path+out_fname+'.nii.gz')
-    print output_path+out_fname+'.nii.gz'
+    print(output_path+out_fname+'.nii.gz')

@@ -62,7 +62,7 @@ parser.add_argument("--strfresh", action="store_true" ,
 
 
 args = parser.parse_args()
-print '--------------experiment arguments--------------'
+print('--------------experiment arguments--------------')
 pprint.pprint(args.__dict__,width=1)
 
 # sanity check
@@ -82,9 +82,9 @@ options = {'input_path'  : '/jukebox/ramadge/pohsuan/SRM/data/input/'+data_folde
                             data_folder+exp_folder+alg_folder+opt_folder,\
            'output_path' : '/jukebox/ramadge/pohsuan/SRM/data/output/'+\
                             data_folder+exp_folder+alg_folder+opt_folder}
-print '----------------experiment paths----------------'
+print('----------------experiment paths----------------')
 pprint.pprint(options,width=1)
-print '------------------------------------------------'
+print('------------------------------------------------')
 
 # sanity check of the input arguments
 if args.exptype == 'imgtrn_mysseg':
@@ -121,7 +121,7 @@ else:
 #    sys.exit('experiment already finished, early termination')
 
 
-print 'start loading data'
+print('start loading data')
 # load data for alignment and prediction
 # load movie data after voxel selection by matdata_preprocess.m 
 if args.exptype == 'imgtrn_mysseg':
@@ -159,7 +159,7 @@ assert nvoxel_pred == args.nvoxel
 assert nsubjs_pred == nsubjs_align or args.loo
 
 # run alignment
-print 'start alignment'
+print('start alignment')
 if args.align_algo != 'noalign':
   algo = importlib.import_module('alignment_algo.'+args.align_algo)
 expt = importlib.import_module('experiments.'+args.exptype)
@@ -219,4 +219,4 @@ for i in range(args.niter):
   if args.align_algo in ['noalign','pica','ppca']:
       for iteration in range(10):
           np.savez_compressed(options['working_path']+args.align_algo+'_acc_'+str(iteration)+'.npz',accu = accu)
-  print np.mean(accu)
+  print(np.mean(accu))

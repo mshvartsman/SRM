@@ -51,4 +51,4 @@ output = open('algo_list.pkl', 'wb')
 pickle.dump(algo_list, output)
 output.close()
 
-print algo_list
+print(algo_list)

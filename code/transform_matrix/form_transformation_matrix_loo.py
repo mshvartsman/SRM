@@ -8,7 +8,7 @@ def transform(args, workspace_lh ,workspace_rh, align_data_lh, align_data_rh, ns
   transform_rh = np.zeros((args.nvoxel,args.nfeature,nsubjs))
   
   loo = args.loo
-  loo_idx = range(nsubjs)
+  loo_idx = list(range(nsubjs))
   loo_idx = np.delete(loo_idx, loo)
 
   align_data_lh_loo_zscore = stats.zscore(align_data_lh[:,:,loo].T ,axis=0, ddof=1).T 
